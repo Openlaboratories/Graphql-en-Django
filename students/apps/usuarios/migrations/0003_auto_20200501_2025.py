@@ -7,29 +7,29 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('usuarios', '0002_grade'),
+        ("usuarios", "0002_grade"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=45)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=45)),
             ],
         ),
         migrations.RemoveField(
-            model_name='grade',
-            name='student',
+            model_name="grade",
+            name="student",
         ),
         migrations.CreateModel(
-            name='CoursePerStudent',
+            name="CoursePerStudent",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=45)),
-                ('courses', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='usuarios.Course')),
-                ('grades', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='usuarios.Grade')),
-                ('students', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='usuarios.Student')),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=45)),
+                ("courses", models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to="usuarios.Course")),
+                ("grades", models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to="usuarios.Grade")),
+                ("students", models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to="usuarios.Student")),
             ],
         ),
     ]
