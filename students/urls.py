@@ -15,8 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from graphene_django.views import GraphQLView
+from graphene_django.views import GraphQLView as BaseGraphQLView
 from django.views.decorators.csrf import csrf_exempt
+
+# code from: https://stackoverflow.com/questions/49349689/how-to-return-customized-json-response-for-an-error-in-graphene-django-graphen
+class GraphQLView(BaseGraphQLView):
+
+    @staticmethod
+    def format_error(error):
+        formatted_error = super(GraphQLView, GraphQLView).format_error(error)
+
+        try:
+            formatted_error["context"] = error.original_error.context
+        except AttributeError:
+            pass
+
+        return formatted_error
 
 urlpatterns = [
     path("admin/", admin.site.urls),
