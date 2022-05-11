@@ -1,7 +1,15 @@
 
 import graphene
-from graphene_django import DjangoObjectType
-from .models import *
+
+from students.apps.usuarios.Courses.models import Course
+from students.apps.usuarios.Grades.models import Grade
+from students.apps.usuarios.Courses.Students.models import CoursePerStudent
+from students.apps.usuarios.Students.models import Student
+
+from students.apps.usuarios.Courses.schema import CourseType
+from students.apps.usuarios.Grades.schema import GradeType
+from students.apps.usuarios.Courses.Students.schema import CoursePerStudentType
+from students.apps.usuarios.Students.schema import StudentType
 
 
 # code from: https://stackoverflow.com/questions/49349689/how-to-return-customized-json-response-for-an-error-in-graphene-django-graphen
@@ -12,26 +20,6 @@ class APIException(Exception):
         if status_code:
             self.context["status_code"] = status_code
         super().__init__(message)
-
-
-class StudentType(DjangoObjectType):
-    class Meta:
-        model = Student
-
-
-class GradeType(DjangoObjectType):
-    class Meta:
-        model = Grade
-
-
-class CourseType(DjangoObjectType):
-    class Meta:
-        model = Course
-
-
-class CoursePerStudentType(DjangoObjectType):
-    class Meta:
-        model = CoursePerStudent
 
 
 class Query(graphene.ObjectType):
